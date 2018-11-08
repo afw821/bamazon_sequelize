@@ -1,8 +1,16 @@
 {
   "name": "bamazon_sequelize",
   "version": "1.0.0",
-  "description": "",
+  "description": "bamazon store",
   "main": "server.js",
+  "dependencies": {
+    "config.json": "^0.0.4",
+    "express": "^4.16.4",
+    "mysql": "^2.16.0",
+    "mysql2": "^1.6.4",
+    "sequelize": "^4.23.0"
+  },
+  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
@@ -11,14 +19,10 @@
     "type": "git",
     "url": "git+https://github.com/afw821/bamazon_sequelize.git"
   },
-  "keywords": [],
-  "author": "",
+  "author": "alex w",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/afw821/bamazon_sequelize/issues"
   },
-  "homepage": "https://github.com/afw821/bamazon_sequelize#readme",
-  "dependencies": {
-    "config.json": "0.0.4"
-  }
+  "homepage": "https://github.com/afw821/bamazon_sequelize#readme"
 }

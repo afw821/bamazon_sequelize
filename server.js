@@ -10,6 +10,7 @@ const PORT = 9095;
 // Sets up our server to parse our request body for usage
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(express.static('public'));
 
 // Routes
 // -----------------
