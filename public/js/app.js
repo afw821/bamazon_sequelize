@@ -6,7 +6,7 @@
 let queryUrl = 'http://localhost:9095/api/products';
 
 $.ajax({
-    url: queryUrl,
+    url: 'api/products',
     method: 'GET'
 }).then(function (response) {
 
