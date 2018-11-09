@@ -3,46 +3,61 @@
 
 
 
-    let queryUrl = 'http://localhost:9095/api/products';
+let queryUrl = 'http://localhost:9095/api/products';
 
-    $.ajax({
-        url: queryUrl,
-        method: 'GET'
-    }).then(function (response) {
-        
-            console.log(response);
-            console.log(response[0]);
-        
-            for (let i = 0; i < response[i].length; i++) {
-                console.log('hello world');
-                $('#product-info').html(`
+$.ajax({
+    url: queryUrl,
+    method: 'GET'
+}).then(function (response) {
+
+    console.log(response);
+    console.log(response[0].stock_quantity);
+
+    for (let i = 0; i < response.length; i++) {
+        console.log('hello world');
+        $('#product-info').append(`
                 <tr>
-                <th scope="row">${response[i].product_name}</th>
-                  <td>${response[i].stock_quantity}</td>
-                  <td>${response[i].price}</td>
+                <th>${response[i].product_name}</th>
+                  <td>${response[i].stock_quantity} units</td>
+                  <td>$${response[i].price}.99</td>
                   <td><form class="form-inline">
-                  <label class="my-1 mr-2" for="inlineFormCustomSelectPref">Select Quantity</label>
-                  <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref">
-                      <option selected>Choose...</option>
-                      <option value="1">One</option>
-                      <option value="2">Two</option>
-                      <option value="3">Three</option>
-                      <option value="5">Five</option>
-                      <option value="10">Ten</option>
-                      <option value="15">Fifteen</option>
-                  </select>
-
-                  <button type="submit" class="btn btn-primary my-1 addOne">Add to Cart</button>
+                  <label class="my-1 mr-2" for="inlineFormCustomSelectPref">Enter Quantity</label>
+                  <form>
+  <div class="form-row align-items-center">
+    <div class="col-auto">
+      <label class="sr-only" for="inlineFormInput">Quantity</label>
+      <input type="text" class="form-control mb-2" class="inlineFormInput" placeholder="Qty">
+    </div>
+                  <button type="submit" value="submit" class="btn btn-primary my-1 addOne">Add to Cart</button>
               </form></td>
                 </tr>)`);
-            }
+
+        $('addOne').on('click', function () {
+            console.log("herp derp");
+            $('#inlineFormInput').empty("");
+            $('inlineFormInput').val("", function () {
+                $("#cart-table").append(`
+                        <tr>
+                        <th>${response[i].product_name}</th>
+                          <td>$${response[i].price}.99</td>
+                          <td>"value from input field"</td></tr>`);
+            })
+
+        });
+    }
 
 
 
-    });
-    
-    
+});
 
+
+// (function ($) {
+//     const addToCart = function () {
+// $('.inlineFornInput').val("").appendTo('#cart-table');
+//     }
+//     $('.addOne').on('click', addToCart);
+
+// });
 
 
 

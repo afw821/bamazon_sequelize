@@ -23,4 +23,6 @@
         $('.checkout').removeClass('hide');
     }
     $('.view-checkout').on('click', showCheckout);
+    $('.checkout-button').on('click', showCheckout);
+    // $('.addOne').on('click', showCheckout);
 })(jQuery);
