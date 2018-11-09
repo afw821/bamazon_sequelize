@@ -1,57 +1,72 @@
-// use ajax to request products from /api/products
-// render individual products as row in tbody tag
+
+$(function () {
+    $.ajax({
+        url: '/api/products',
+        method: 'GET'
+    }).then(function (response) {
+
+        console.log(response);
+        console.log(response[0].stock_quantity);
+
+        for (let i = 0; i < response.length; i++) {
+            console.log('hello world');
+            $('#product-info').append(`
+            <tr>
+            <th>${response[i].product_name}</th>
+              <td>${response[i].stock_quantity} units</td>
+              <td>$${response[i].price}.99</td>
+              <td><form class="form-inline">
+              <label class="my-1 mr-2" for="inlineFormCustomSelectPref">Enter Quantity</label>
+              <form>
+            <div class="form-row align-items-center">
+            <div class="col-auto">
+             <label class="sr-only" for="inlineFormInput">Quantity</label>
+            <input type="text" class="form-control mb-2 inlineFormInput" placeholder="Qty">
+            </div>
+              <button data-ProdName=${response[i].product_name} data-Quant=${response[i].stock_quantity} data-Price=${response[i].price} type="submit" value="submit" class="btn btn-primary my-1 addOne">Add to Cart</button>
+          </form></td>
+            </tr>)`);
+
+        }
+        console.log("appending complete");
 
 
+    });
 
-let queryUrl = 'http://localhost:9095/api/products';
 
-$.ajax({
-    url: 'api/products',
-    method: 'GET'
-}).then(function (response) {
+    const addToCart = function () {
+        let itemName = $(this).attr("data-ProdName");
+        let itemQuantity = $(this).attr('data-Quant');
+        let itemPrice = $(this).attr('data-Price');
+        let userQuantity = $('.inlineFormInput').val();
+        console.log("all data grabbed and to be pushed to cart:", itemName, itemQuantity, itemPrice, userQuantity);
+        $('#cart-table').append(` 
+        <tr>
+        <th>${itemName}</th>
+          <td>$${itemPrice}.99</td>
+          <td>${userQuantity}</td>
+          </tr>`);
 
-    console.log(response);
-    console.log(response[0].stock_quantity);
-
-    for (let i = 0; i < response.length; i++) {
-        console.log('hello world');
-        $('#product-info').append(`
-                <tr>
-                <th>${response[i].product_name}</th>
-                  <td>${response[i].stock_quantity} units</td>
-                  <td>$${response[i].price}.99</td>
-                  <td><form class="form-inline">
-                  <label class="my-1 mr-2" for="inlineFormCustomSelectPref">Enter Quantity</label>
-                  <form>
-  <div class="form-row align-items-center">
-    <div class="col-auto">
-      <label class="sr-only" for="inlineFormInput">Quantity</label>
-      <input type="text" class="form-control mb-2" class="inlineFormInput" placeholder="Qty">
-    </div>
-                  <button type="submit" value="submit" class="btn btn-primary my-1 addOne">Add to Cart</button>
-              </form></td>
-                </tr>)`);
-
-        $('addOne').on('click', function () {
-            console.log("herp derp");
-            $('#inlineFormInput').empty("");
-            $('inlineFormInput').val("", function () {
-                $("#cart-table").append(`
-                        <tr>
-                        <th>${response[i].product_name}</th>
-                          <td>$${response[i].price}.99</td>
-                          <td>"value from input field"</td></tr>`);
-            })
-
-        });
     }
+    $("#product-info").on("click", ".addOne", addToCart);
+
+
 
 
 
 });
 
 
-// (function ($) {
+// use ajax to request products from /api/products
+// render individual products as row in tbody tag
+
+
+//ajax request from api retrieving: product, stock quantity, and price
+//append data from ajax request to table dynamically
+//capture user quantity desired from input field
+//on click of add to cart button: take values captured, and corresponding product data to cart table
+
+// 
 //     const addToCart = function () {
 // $('.inlineFornInput').val("").appendTo('#cart-table');
 //     }
