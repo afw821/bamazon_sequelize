@@ -1,4 +1,11 @@
 body{
-    background-color: gray;
-    opacity:0.6
+    background-color: rgb(176, 189, 192);
+    opacity:0.6;
+    width:100%;
+}
+.hide{
+    display: none;
+}
+.page-row{
+    width:100%;
 }
