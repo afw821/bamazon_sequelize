@@ -1,6 +1,15 @@
-/*This function hides the inventory and shows the cart when the view
- cart button is clicked */
+
 (function ($) {
+    //This funciton is what causes the Nav Bar to fade when scrolled
+    $(window).scroll(function () {
+        if ($(this).scrollTop() > 100) {
+            $('.nav-top').fadeTo('fast', 0.0);
+        } else {
+            $('.nav-top').fadeTo('fast', 1.0);
+        }
+    });
+    /*This function hides the inventory and shows the cart when the view
+ cart button is clicked */
     const hideJumbotron = function () {
         $('.bye-bye').addClass('hide');
         $('.hello').removeClass('hide');

@@ -1,8 +1,8 @@
 (function($){
 
-    $.ajax9({
+    $.ajax({
         url: "/api/products/:id",
-        method: "put"
+        method: "PUT"
     }).then(function(responseTwo){
         console.log(responseTwo);
     })

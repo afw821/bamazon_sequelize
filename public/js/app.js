@@ -5,10 +5,10 @@ $(function () {
         method: 'GET'
     }).then(function (response) {
 
-     
+
 
         for (let i = 0; i < response.length; i++) {
-         
+
             $('#product-info').append(`
             <tr>
             <th>${response[i].product_name}</th>
@@ -27,30 +27,55 @@ $(function () {
             </tr>)`);
 
         }
-        
+
 
 
     });
     const addToCart = function () {
         let itemName = $(this).attr("data-ProdName");
-        let itemQuantity = $(this).attr('data-Quant');
         let itemPrice = $(this).attr('data-Price');
         let userQuantity = $('.inlineFormInput').val();
-       
+
         $('#cart-table').append(` 
         <tr>
-        <th>${itemName}</th>
-          <td>$${itemPrice}.99</td>
-          <td>${userQuantity}</td>
-          </tr>`);
+        <th class="cart-item">${itemName}</th>
+          <td class="cart-price">$${itemPrice}.99</td>
+          <td class="cart-quantity">${userQuantity}</td>
+          </tr> `);
+          $('.button-div').empty();
+          $('.button-div').append(`<button type="submit" class="btn btn-primary my-1 checkout-button addCart"> Click to Checkout</button>`);
+
     }
     $("#product-info").on("click", ".addOne", addToCart);
 
+    const emptyCart = function (){
+        $('.cart-item').empty();
+        $('.cart-price').empty();
+        $('.cart-quantity').empty();
 
+    }
+   $('.empty-cart').on('click', emptyCart);
   
 
+    const addToCheckout = function () {
+        let item = $(this).attr('data-ProdName');
+        let price = $(this).attr("data-Price");
+        let quantity= $(".inlineFormInput").val();
+        console.log('hello');
 
-//You want to capture the values in 
+        $('#checkout-table').append(`<tr>
+        <th>${item}</th>
+          <td>$${price}.99</td>
+          <td>${quantity}</td>
+          </tr>`);
+        
+    }
+    $('.button-div').on('click', '.checkout-button', addToCheckout);
+
+
+
+
+    //You want to capture the values in 
 
 });
 
