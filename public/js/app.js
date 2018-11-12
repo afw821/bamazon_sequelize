@@ -5,11 +5,10 @@ $(function () {
         method: 'GET'
     }).then(function (response) {
 
-        console.log(response);
-        console.log(response[0].stock_quantity);
+     
 
         for (let i = 0; i < response.length; i++) {
-            console.log('hello world');
+         
             $('#product-info').append(`
             <tr>
             <th>${response[i].product_name}</th>
@@ -28,31 +27,30 @@ $(function () {
             </tr>)`);
 
         }
-        console.log("appending complete");
+        
 
 
     });
-
-
     const addToCart = function () {
         let itemName = $(this).attr("data-ProdName");
         let itemQuantity = $(this).attr('data-Quant');
         let itemPrice = $(this).attr('data-Price');
         let userQuantity = $('.inlineFormInput').val();
-        console.log("all data grabbed and to be pushed to cart:", itemName, itemQuantity, itemPrice, userQuantity);
+       
         $('#cart-table').append(` 
         <tr>
         <th>${itemName}</th>
           <td>$${itemPrice}.99</td>
           <td>${userQuantity}</td>
           </tr>`);
-
     }
     $("#product-info").on("click", ".addOne", addToCart);
 
 
+  
 
 
+//You want to capture the values in 
 
 });
 
