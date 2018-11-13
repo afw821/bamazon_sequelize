@@ -8,7 +8,7 @@ $(function () {
 
 
         for (let i = 0; i < response.length; i++) {
-
+            
             $('#product-info').append(`
             <tr>
             <th>${response[i].product_name}</th>
@@ -22,7 +22,7 @@ $(function () {
              <label class="sr-only" for="inlineFormInput">Quantity</label>
             <input type="text" class="form-control mb-2 inlineFormInput" placeholder="Qty">
             </div>
-              <button data-ProdName=${response[i].product_name} data-Quant=${response[i].stock_quantity} data-Price=${response[i].price} type="submit" value="submit" class="btn btn-primary my-1 addOne">Add to Cart</button>
+              <button data-ProdName=${response[i].product_name} data-Quant=${response[i].stock_quantity} data-Price=${response[i].price} data-userQuant=${i} type="submit" value="submit" class="btn btn-primary my-1 addOne">Add to Cart</button>
           </form></td>
             </tr>)`);
 
@@ -34,7 +34,7 @@ $(function () {
     const addToCart = function () {
         let itemName = $(this).attr("data-ProdName");
         let itemPrice = $(this).attr('data-Price');
-        let userQuantity = $('.inlineFormInput').val();
+        let userQuantity = $('.inlineFormInput').get($(this).attr('data-userQuant')).value;
 
         $('#cart-table').append(` 
         <tr>
@@ -55,22 +55,32 @@ $(function () {
 
     }
    $('.empty-cart').on('click', emptyCart);
-  
+
+   const addCartCounter = function (){
+    let sum = 0; 
+    console.log('hi there');
+    
+        
+        
+        $('.cart-counter').html(sum += summm);
+    
+    
+   }
+  $('#product-info').on('click', '.addOne', addCartCounter);
 
     const addToCheckout = function () {
-        let item = $(this).attr('data-ProdName');
-        let price = $(this).attr("data-Price");
-        let quantity= $(".inlineFormInput").val();
+        let item = $('.addOne').attr('data-ProdName');
+        let price = $('.addOne').attr("data-Price");
+        let quantity= $(".inlineFormInput").get($('.addOne').attr('data-userQuant')).value;
         console.log('hello');
 
         $('#checkout-table').append(`<tr>
         <th>${item}</th>
           <td>$${price}.99</td>
           <td>${quantity}</td>
-          </tr>`);
-        
+          </tr>`);  
     }
-    $('.button-div').on('click', '.checkout-button', addToCheckout);
+    $('.button-div').on('click', '.addCart', addToCheckout);
 
 
 

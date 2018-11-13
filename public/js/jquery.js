@@ -14,8 +14,13 @@
         $('.bye-bye').addClass('hide');
         $('.hello').removeClass('hide');
         $('.checkout').addClass('hide');
+        
     }
     $('.view-cart').on('click', hideJumbotron);
+
+    $('#product-info').on('click', '.addOne', function(){
+        $('.inlineFormInput').empty();
+    })
 
     /* This function hides the cart and shows the inventory when the back button is clicked */
     const hideCart = function () {
@@ -32,6 +37,8 @@
         $('.checkout').removeClass('hide');
     }
     $('.view-checkout').on('click', showCheckout);
-    $('.checkout-button').on('click', showCheckout);
+    $('.button-div').on('click', '.checkout-button', showCheckout);
     // $('.addOne').on('click', showCheckout);
+
+    
 })(jQuery);
