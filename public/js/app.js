@@ -4,11 +4,9 @@ $(function () {
         url: '/api/products',
         method: 'GET'
     }).then(function (response) {
-
-
-
+//Loops through the response and dynamically adds the information on the product selection page
         for (let i = 0; i < response.length; i++) {
-            
+
             $('#product-info').append(`
             <tr>
             <th>${response[i].product_name}</th>
@@ -25,12 +23,9 @@ $(function () {
               <button data-ProdName=${response[i].product_name} data-Quant=${response[i].stock_quantity} data-Price=${response[i].price} data-userQuant=${i} type="submit" value="submit" class="btn btn-primary my-1 addOne">Add to Cart</button>
           </form></td>
             </tr>)`);
-
         }
-
-
-
     });
+    //This function adds items selected to the cart and appends them to the table
     const addToCart = function () {
         let itemName = $(this).attr("data-ProdName");
         let itemPrice = $(this).attr('data-Price');
@@ -42,70 +37,46 @@ $(function () {
           <td class="cart-price">$${itemPrice}.99</td>
           <td class="cart-quantity">${userQuantity}</td>
           </tr> `);
-          $('.button-div').empty();
-          $('.button-div').append(`<button type="submit" class="btn btn-primary my-1 checkout-button addCart"> Click to Checkout</button>`);
-
+        $('.button-div').empty();
+        $('.button-div').append(`<button type="submit" class="btn btn-primary my-1 checkout-button addCart"> Click to Checkout</button>`);
     }
     $("#product-info").on("click", ".addOne", addToCart);
 
-    const emptyCart = function (){
+//This function empties the items in the cart when empty cart button clicked
+    const emptyCart = function () {
         $('.cart-item').empty();
         $('.cart-price').empty();
         $('.cart-quantity').empty();
 
     }
-   $('.empty-cart').on('click', emptyCart);
+    $('.empty-cart').on('click', emptyCart);
 
-   const addCartCounter = function (){
-    let sum = 0; 
-    console.log('hi there');
-    
-        
-        
-        $('.cart-counter').html(sum += summm);
-    
-    
-   }
-  $('#product-info').on('click', '.addOne', addCartCounter);
 
+//This function adds to the cart count on the home oage when add to car is clicked
+    let count = 0;
+    $("#product-info").on('click', '.addOne', function () {
+        count++;
+        $(".cart-counter").html(count);
+    });
+    
+
+//This function adds items from the cart to the checkout screen when click to checkout is clicked
     const addToCheckout = function () {
         let item = $('.addOne').attr('data-ProdName');
         let price = $('.addOne').attr("data-Price");
-        let quantity= $(".inlineFormInput").get($('.addOne').attr('data-userQuant')).value;
-        console.log('hello');
+        let quantity = $(".inlineFormInput").get($('.addOne').attr('data-userQuant')).value;
 
         $('#checkout-table').append(`<tr>
         <th>${item}</th>
           <td>$${price}.99</td>
           <td>${quantity}</td>
-          </tr>`);  
+          </tr>`);
     }
     $('.button-div').on('click', '.addCart', addToCheckout);
-
-
-
-
-    //You want to capture the values in 
 
 });
 
 
-// use ajax to request products from /api/products
-// render individual products as row in tbody tag
-
-
-//ajax request from api retrieving: product, stock quantity, and price
-//append data from ajax request to table dynamically
-//capture user quantity desired from input field
-//on click of add to cart button: take values captured, and corresponding product data to cart table
-
-// 
-//     const addToCart = function () {
-// $('.inlineFornInput').val("").appendTo('#cart-table');
-//     }
-//     $('.addOne').on('click', addToCart);
-
-// });
 
 
 
