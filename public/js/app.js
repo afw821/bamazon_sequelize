@@ -4,7 +4,7 @@ $(function () {
         url: '/api/products',
         method: 'GET'
     }).then(function (response) {
-//Loops through the response and dynamically adds the information on the product selection page
+        //Loops through the response and dynamically adds the information on the product selection page
         for (let i = 0; i < response.length; i++) {
 
             $('#product-info').append(`
@@ -20,7 +20,9 @@ $(function () {
              <label class="sr-only" for="inlineFormInput">Quantity</label>
             <input type="text" class="form-control mb-2 inlineFormInput" placeholder="Qty">
             </div>
-              <button data-ProdName=${response[i].product_name} data-Quant=${response[i].stock_quantity} data-Price=${response[i].price} data-userQuant=${i} type="submit" value="submit" class="btn btn-primary my-1 addOne">Add to Cart</button>
+              <button data-ProdName=${response[i].product_name} data-Quant=${response[i].stock_quantity} 
+              data-Price=${response[i].price} 
+              data-userQuant=${i} type="submit" value="submit" class="btn btn-primary my-1 addOne">Add to Cart</button>
           </form></td>
             </tr>)`);
         }
@@ -42,25 +44,24 @@ $(function () {
     }
     $("#product-info").on("click", ".addOne", addToCart);
 
-//This function empties the items in the cart when empty cart button clicked
+    //This function empties the items in the cart when empty cart button clicked
     const emptyCart = function () {
         $('.cart-item').empty();
         $('.cart-price').empty();
         $('.cart-quantity').empty();
+        $('.cart-counter').empty();
 
     }
     $('.empty-cart').on('click', emptyCart);
 
-
-//This function adds to the cart count on the home oage when add to car is clicked
+    //This function adds to the cart count on the home oage when add to car is clicked
     let count = 0;
     $("#product-info").on('click', '.addOne', function () {
         count++;
         $(".cart-counter").html(count);
     });
-    
 
-//This function adds items from the cart to the checkout screen when click to checkout is clicked
+    //This function adds items from the cart to the checkout screen when click to checkout is clicked
     const addToCheckout = function () {
         let item = $('.addOne').attr('data-ProdName');
         let price = $('.addOne').attr("data-Price");
@@ -73,7 +74,6 @@ $(function () {
           </tr>`);
     }
     $('.button-div').on('click', '.addCart', addToCheckout);
-
 });
 
 

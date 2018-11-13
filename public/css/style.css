@@ -1,11 +1,32 @@
 body{
-    background-color:rgb(80, 152, 180);
+    /* background-color:rgb(80, 152, 180);  */
+    background-image: url("../assets/fishing.jpg");
+    /* background-repeat:no-repeat; */
+    background-size:cover; 
     opacity:0.9;
     width:100%;
 }
 .hide{
     display: none;
 }
+.navigation-links{
+    color:orange;
+}
+.jumbo-img{
+    position:relative;
+    bottom:20px;
+}
 .page-row{
     width:100%;
+}
+.jumbotron{
+    margin-top:35px;
+}
+.cart-counter{
+    font-family:Arial, Helvetica, sans-serif;
+    font-weight:bold;
+    font-size:22px;
+    position:absolute;
+    left: 100px;
+    top: 240px;
 }

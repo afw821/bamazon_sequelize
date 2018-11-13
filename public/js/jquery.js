@@ -3,7 +3,7 @@
     //This funciton is what causes the Nav Bar to fade when scrolled
     $(window).scroll(function () {
         if ($(this).scrollTop() > 100) {
-            $('.nav-top').fadeTo('fast', 0.0);
+            $('.nav-top').fadeTo('fast', 0.1);
         } else {
             $('.nav-top').fadeTo('fast', 1.0);
         }
