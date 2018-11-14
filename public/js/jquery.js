@@ -1,13 +1,13 @@
 
 (function ($) {
     //This funciton is what causes the Nav Bar to fade when scrolled
-    $(window).scroll(function () {
-        if ($(this).scrollTop() > 100) {
-            $('.nav-top').fadeTo('fast', 0.1);
-        } else {
-            $('.nav-top').fadeTo('fast', 1.0);
-        }
-    });
+    // $(window).scroll(function () {
+    //     if ($(this).scrollTop() > 100) {
+    //         $('.nav-top').fadeTo('fast', 0.1);
+    //     } else {
+    //         $('.nav-top').fadeTo('fast', 1.0);
+    //     }
+    // });
     /*This function hides the inventory and shows the cart when the view
  cart button is clicked */
     const hideJumbotron = function () {
@@ -18,9 +18,9 @@
     }
     $('.view-cart').on('click', hideJumbotron);
 
-    $('#product-info').on('click', '.addOne', function(){
-        $('.inlineFormInput').empty();
-    })
+    // $('#product-info').on('click', '.addOne', function(){
+    //     $('.inlineFormInput').empty();
+    // })
 
     /* This function hides the cart and shows the inventory when the back button is clicked */
     const hideCart = function () {
