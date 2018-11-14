@@ -33,7 +33,7 @@ $(function () {
         let itemName = $(this).attr("data-ProdName");
         let itemPrice = $(this).attr('data-Price');
         let userQuantity = $(`input#product-${itemId}`).val();
-
+        event.preventDefault();
         $('#cart-table').append(` 
         <tr>
         <th class="cart-item">${itemName}</th>
