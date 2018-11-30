@@ -28,10 +28,11 @@ $(function () {
         }
     });
     //This function adds items selected to the cart and appends them to the table
-    const addToCart = function () {
+    const addToCart = function (event) {
         let itemId = $(this).attr("data-productId");
         let itemName = $(this).attr("data-ProdName");
         let itemPrice = $(this).attr('data-Price');
+
         let userQuantity = $(`input#product-${itemId}`).val();
         event.preventDefault();
         $('#cart-table').append(` 
@@ -39,42 +40,58 @@ $(function () {
         <th class="cart-item">${itemName}</th>
           <td class="cart-price">$${itemPrice}.99</td>
           <td class="cart-quantity">${userQuantity}</td>
+        
           </tr> `);
+          $('#checkout-table').append(`<tr>
+          <th>${itemName}</th>
+            <td>$${itemPrice}.99</td>
+            <td>${userQuantity}</td>
+            </tr>`);
         $('.button-div').empty();
+
         $('.button-div').append(`<button type="submit" class="btn btn-primary my-1 checkout-button addCart"> Click to Checkout</button>`);
     }
     $("#product-info").on("click", ".addOne", addToCart);
 
     //This function empties the items in the cart when empty cart button clicked
     const emptyCart = function () {
+
         $('.cart-item').empty();
         $('.cart-price').empty();
         $('.cart-quantity').empty();
         $('.cart-counter').empty();
-
+        $('.cart-total-price').empty();
     }
     $('.empty-cart').on('click', emptyCart);
 
-    //This function adds to the cart count on the home oage when add to car is clicked
+    //This function adds to the cart count on the home page when add to car is clicked
     let count = 0;
+    if()
     $("#product-info").on('click', '.addOne', function () {
         count++;
         $(".cart-counter").html(count);
     });
+     //This on-click call back function sets the empty counter back to 0 when the car is emptied
+        $('.empty-cart').on('click', function(){
+             count = 0;   
+        });
 
     //This function adds items from the cart to the checkout screen when click to checkout is clicked
-    const addToCheckout = function () {
-        let item = $('.addOne').attr('data-ProdName');
-        let price = $('.addOne').attr("data-Price");
-        let quantity = $(".inlineFormInput").get($('.addOne').attr('data-userQuant')).value;
+    // const addToCheckout = function () {
+    //     let itemIdent = $('button').attr("data-productId");
+    //     let item = $('.addOne').attr('data-ProdName');
+    //     let price = $('.addOne').attr("data-Price");
+    //     // let quantity = $('.addOne').attr('data-userQuant');
+    //     let quantity = $(`input#product-${itemIdent}`).val();
 
-        $('#checkout-table').append(`<tr>
-        <th>${item}</th>
-          <td>$${price}.99</td>
-          <td>${quantity}</td>
-          </tr>`);
-    }
-    $('.button-div').on('click', '.addCart', addToCheckout);
+    //     $('#checkout-table').append(`<tr>
+    //     <th>${item}</th>
+    //       <td>$${price}.99</td>
+    //       <td>${quantity}</td>
+    //       </tr>`);
+    // }
+    // $('.button-div').on('click', '.addCart', addToCheckout);
+
 });
 
 
