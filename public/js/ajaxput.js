@@ -11,13 +11,24 @@ $(function () {
             price: price,
             stock_quantity: stockQuantity
         };
-        
+
         $.ajax({
-            url: "/api/products/:id",
+            url: `/api/products/${productId}`,
             method: "PUT",
             data: updatedProduct
-        }).then(function (responseTwo) {
-            console.log(responseTwo);
+        }).then(function (data) {
+            if (data.success) {
+                console.log(product, "'s stock has been updated ")
+                $.get(`/api/products/${productId}`).then(function (data) {
+                    console.log(data);
+                })
+            }
+            else {
+                $.get(`/api/products/${productId}`).then(function (data) {
+                    console.log(data);
+                })
+
+            }
             //when the checkout button is clicked, the quatity (stock_quantity) of the specific
             //item is updated in the overall inventory
         })
@@ -25,3 +36,10 @@ $(function () {
     }
     $('.checkout-button').on('click', myFunction);
 });
+
+//when checkout button is clicked
+
+//loop through all items in the cart and do the following:
+        // attain database current stock for this item specifically
+        //update database stock versus quantity bought by user
+        // re-render stock amounts on main item page
